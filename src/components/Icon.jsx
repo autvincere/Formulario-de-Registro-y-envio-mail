@@ -1,5 +1,6 @@
 import React from 'react'
-import IcoMoon, { iconList } from "react-icomoon";
+import IcoMoon from "react-icomoon";
+// import IcoMoon, { iconList } from "react-icomoon";
 const iconSet = require("../assets/icons/selection.json");
 
 const Icon = ({ ...props }) => {
