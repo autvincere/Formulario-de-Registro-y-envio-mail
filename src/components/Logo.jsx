@@ -1,7 +1,7 @@
 import * as React from "react"
 
 const Logo = (props) => {
-     console.log(props.width);
+    //  console.log(props.width);
   return (
     <svg width={props.width} height={99} viewBox="0 0 278 99" {...props}>
       <title>{"Group 80"}</title>
