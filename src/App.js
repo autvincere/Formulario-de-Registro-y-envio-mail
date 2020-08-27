@@ -8,6 +8,10 @@ import Footer from './components/Footer'
 const GlobalStyle = createGlobalStyle`
 ${Reset}
 ${Typography}
+@font-face {
+      src: url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    }
 a{color: #ffffff; text-decoration: none;}
 
 h1{
