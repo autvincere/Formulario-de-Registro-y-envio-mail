@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 import Photo from '../assets/img/ximena_carlos.jpg';
 import Logo from '../components/Logo'
 import ReCAPTCHA from "react-google-recaptcha";
+import Icon from './Icon'
 
 const SectionForm = styled.section`
 width: 50%;
@@ -11,16 +12,50 @@ display: flex;
 flex-direction: column;
 justify-content:center;
 align-items: center;
+
 h1{
-     text-align:center;
-     font-size: 1.5em;
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+     text-align: center;
+     font-size: 1.3em;
 }
 form{
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      width: 90%;
-     margin: 10px 0px;
-
-
+     margin: 2px 0px 17px 0px;
 }
+label{
+     color: #202020;
+}
+.center-recaptcha{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 34px;
+}
+.label-primary{
+     font-size: 1.1em;
+     font-weight: 200;
+     position: absolute;
+     top: 10px;
+     left: 19px;
+}
+.label-interaction{
+     font-size: 0.9em;
+     font-weight: 200;
+     position: absolute;
+     top: 3px;
+     left: 19px;
+}
+.social-icons{
+    filter: dropShadow(-2px 3px 4px #000000);
+}
+p{
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  color: white;
+  text-align: right;
+  padding: 0px 0 0 0;
+  font-size: 0.98em;
+  }
 /* > * {
      justify-content:center;   
 } */
@@ -30,23 +65,42 @@ width: 50%;
 height: 100%;
 line-height: 0px;
 overflow: hidden;
+position: relative;
+.social{
+     position: absolute;
+     bottom: 5px;
+    right: 4px;
+    a{
+         margin-right: 6px;
+          &:last-child {
+               margin-right: 0px;
+          }
+          .social-icons{
+    filter: drop-shadow(-2px 3px 2px #000000);
+}
+    }
+}
 img{
      width: 100%;
 }
 `
 const LogoMain = styled(Logo)`
-  width: ${ props => props.width || '248px'};
+  width: ${ props => props.width || '238px'};
   text-align: center;
+  margin-bottom: 8px;
+  margin-top: 8px;
 `
 
 const ContInput = styled.div`
-    margin: 10px 0px;
-div{
-     height: 44px;
-     display: flex;
-     flex-flow: column-reverse;
+    margin: 32px 0px;
+     position: relative;
+     height: 38px;
+     &:first-child{
+          margin: 0px 0px 32px 0px;
+     }
      
      label, input {
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      transition: all 0.2s;
      touch-action: manipulation;
      }
@@ -54,12 +108,14 @@ div{
           font-weight: 200;
      }
      input {
-     font-size: 1.3em;
+     width: 100%;
+     height: 38px;
+     font-size: 1.1em;
      border: 0;
-     
+     margin: 6px 0px;
      -webkit-appearance: none;
      border-radius: 3px;
-     font-size: 1.5em;
+     /* font-size: 1.5em; */
      padding: 12px 0 0 17px;
      font-weight: 400;
      cursor: text;
@@ -67,60 +123,30 @@ div{
                outline: 0;
                border-bottom: 1px solid #666;
                }
-          &:placeholder-shown + label {
-               cursor: text;
-               max-width: 60%;
-               white-space: nowrap;
-               /* overflow: hidden; */
-               text-overflow: ellipsis;
-               transform-origin: left bottom;
-               transform: translate(19px, 40px) scale(1.3);
           }
-          &:focus::-webkit-input-placeholder {
-               opacity: 1;
-          }
-          ::-webkit-input-placeholder {
-               opacity: 0;
-               transition: inherit;
-          }
-     }
-
-     input:not(:placeholder-shown) + label,
-     input:focus + label {
-          transform: translate(19px,21px) scale(1);
-     cursor: pointer;
-     }
-}  
-p{
-  color: white;
-  text-align: right;
-  padding: 4px 0 0 0;
-  }
 `
 
 const ContTextArea = styled.div`
      height: 100px;
-     /* display: flex;
-     flex-flow: column-reverse; */
+     padding-top: 5px;
      position: relative;
-     
      label, input {
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      transition: all 0.2s;
      touch-action: manipulation;
      }
-     label {
+      /* label {
           font-weight: 200;
           position: absolute;
           top: 10px;
           left: 19px;
-          font-size: 1.2em;
-     }
+     }  */
 textarea{
           width: 100%;
           height: 100px;
 	     max-width:100%;
           resize:none;
-          font-size: 1.3em;
+          /* font-size: 1.3em; */
           border: 0;
           -webkit-appearance: none;
           border-radius: 3px;
@@ -131,26 +157,52 @@ textarea{
           &:focus {
                outline: transparent auto 0px;
           }
-}
+     }
 `
 const Boton = styled.button`
-background-color: #00838f;
-font-size: 16px;
-width: 100%;
-padding: 1rem;
-color: #fff;
-text-transform: uppercase;
-font-weight: bold;
-border: none;
-margin-top: 2rem;
-transition: 0.3s ease;
-&:hover{
-     cursor: pointer;
-     background-color: #26c6da;
-}
+     background-color: #1D6697;
+     font-size: 1.2em;
+     width: 100%;
+     padding: 9px;
+     color: #fff;
+     text-transform: capitalize;
+     border: none;
+     border-radius: 3px;
+     margin-top: 10px;
+     transition: 0.3s ease;
+     &:hover{
+          cursor: pointer;
+          background-color: #124465;
+     }
 `
 const Contact = () => {
+
+     const [label, setLabel] = useState('label-primary')
+     const [datos, setDatos] = useState({
+          nombres: '',
+          apellidos: '',
+          email: '',
+          telefono: '',
+          asunto: '',
+          mensaje: ''
+     })
+
      const TEST_SITE_KEY = '6LfbBsQZAAAAAMc3KUafSvoPTHJYexmvyF_LeYnM';
+
+     // Leer los datos del formulario y colocarlos en el state
+     const handleChange = e => {
+          console.log(e.target.value);
+          setLabel('label-interaction')
+
+          setDatos({
+               ...datos,
+               [e.target.name] : e.target.value
+          })
+
+          
+     }
+     // extraer los valores
+     let { nombres, apellidos, email, telefono, asunto, mensaje } = datos;
      return (
           <Fragment>
                <SectionForm>
@@ -163,39 +215,88 @@ const Contact = () => {
 
                          <ContInput>
                               <div>
-                                   <input type="text" name="name" id="name" placeholder=" " />
-                                   <label htmlFor="name">Nombres</label>
+                                   <input 
+                                   type="text" 
+                                   name="nombres" 
+                                   value={ nombres }
+                                   onChange={ handleChange }
+                                   />
+                                   <label htmlFor="name" className={label} >Nombres</label>
                               </div>
                               <p>Porfavor, ingrese un nombre válido </p>
                          </ContInput>
 
                          <ContInput>
                               <div>
-                                   <input type="text" name="apellidos" id="apellidos" placeholder=" " />
-                                   <label htmlFor="apellidos">Apellidos</label>
+                                   <input 
+                                   type="text" 
+                                   name="email" 
+                                   value={ email }
+                                   onChange={ handleChange }
+                                   />
+                                   <label htmlFor="email" className={label}>Email</label>
                               </div>
                               <p>Porfavor, ingrese un nombre válido </p>
                          </ContInput>
 
+                         <ContInput>
+                              <div>
+                                   <input 
+                                   type="text" 
+                                   name="email" 
+                                   value={ telefono }
+                                   onChange={ handleChange }
+                                   />
+                                   <label htmlFor="telefono" className={label}>telefono</label>
+                              </div>
+                              <p>Porfavor, ingrese un nombre válido </p>
+                         </ContInput>
+
+                         <ContInput>
+                              <div>
+                                   <input 
+                                   type="text" 
+                                   name="email" 
+                                   value={ asunto }
+                                   onChange={ handleChange }
+                                   />
+                                   <label htmlFor="asunto" className={label}>Asunto</label>
+                              </div>
+                              <p>Porfavor, ingrese un nombre válido </p>
+                         </ContInput>
+
+
                          <ContTextArea>
-                              <textarea 
-                              id="mensaje" 
-                              name="mensaje"
-                              
-                              ></textarea>
-                              <label htmlFor="mensaje">Mensaje:</label>
+                              <div>
+                                   <textarea
+                                        id="mensaje"
+                                        name="mensaje"
+                                        onChange={handleChange}
+                                   >
+
+                                   </textarea>
+                                   <label htmlFor="mensaje" className={label} >Mensaje:</label>
+                              </div>
+                              <p>Porfavor, ingrese un nombre válido </p>
                          </ContTextArea>
                          <ReCAPTCHA
-                                   className="center-align"
-                                   sitekey={TEST_SITE_KEY}
-                                   onChange={ console.log('recapchta') }
-                              />    
-                         <Boton type="submit">Cotizar</Boton>
+                              className="center-recaptcha"
+                              sitekey={TEST_SITE_KEY}
+                              onChange={console.log('recaptcha')}
+                         />
+                         <Boton type="submit">enviar <Icon icon="call" size={20} color="white" style={{ verticalAlign: 'middle' }} /></Boton>
                     </form>
 
                </SectionForm>
 
                <SectionImg>
+                    <article className="social">
+                         <a href="tel:858652585"><Icon icon="facebook" size={29} color="white" style={{verticalAlign: 'middle',}} className="social-icons"/></a>
+
+                         <a href="tel:858652585"><Icon icon="twitter" size={29} color="white" style={{verticalAlign: 'middle'}} className="social-icons"/></a>
+
+                         <a href="tel:858652585"><Icon icon="instagram" size={29} color="white" style={{verticalAlign: 'middle'}} className="social-icons"/></a>
+                    </article>
                     <img src={Photo} alt="" />
                </SectionImg>
 

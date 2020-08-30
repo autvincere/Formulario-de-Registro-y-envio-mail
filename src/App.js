@@ -1,17 +1,13 @@
 import React, {Fragment} from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
+import { Helmet } from 'react-helmet';
 import Background from '../src/assets/img/bkg.jpg';
-import { Reset, Typography, media, Grid, totalCenter} from './utils/constants'
+import { Reset, media, Grid, totalCenter} from './utils/constants'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 const GlobalStyle = createGlobalStyle`
-${Reset}
-${Typography}
-@font-face {
-      src: url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    }
+${Reset};
 a{color: #ffffff; text-decoration: none;}
 
 h1{
@@ -37,7 +33,7 @@ const Bkg = styled.div`
 `;
 const Main = styled.main`
 border: 3px solid #e0e0e059;
-height:80vh;
+height: 90vh;
 max-height: 812px;
 display:flex;
 flex-direction: row;
@@ -52,6 +48,11 @@ background:  black;
 function App() {
   return (
     <Fragment>
+      <Helmet>
+        <title>Suárez & Valenzuela || Estudio Jurídico</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"></link>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
     <GlobalStyle />
     <Bkg image={Background}>
       <Grid>

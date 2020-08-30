@@ -14,10 +14,15 @@ export const Reset = css`
   }
 `
 export const Typography = css`
-    @font-face {
+*{
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+ /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif; */
+    /* @font-face {
       src: url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
       font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    }
+    } */
+  }
 
 `
 const breakpointsDictionary = [

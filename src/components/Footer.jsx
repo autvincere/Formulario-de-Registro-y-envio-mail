@@ -3,17 +3,22 @@ import Icon from './Icon'
 import styled from 'styled-components'
 
 const ContentFooter = styled.footer`
-margin: 6px 0px;
+height: 2vh;
+margin: 4px 0px;
+a{
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
 article{
      display: flex;
      flex-direction: row;
      justify-content: space-between;
 > * {
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      margin-right: 3px;
     font-size: 0.97em;
     font-style: inherit;
     font-weight: 600;
-          &:last-child{
+          &:last-child{  
           margin-right: 0px;  
           }    
      }    
@@ -37,11 +42,11 @@ const Footer = () => {
                     </address>
                </article>
 
-               <article className="social">
+               {/* <article className="social">
                <a href="tel:858652585"><Icon icon="facebook" size={25} color="white" style={{verticalAlign: 'middle'}} /></a>
                <a href="tel:858652585"><Icon icon="twitter" size={25} color="white" style={{verticalAlign: 'middle'}} /></a>
                <a href="tel:858652585"><Icon icon="instagram" size={25} color="white" style={{verticalAlign: 'middle'}} /></a>
-               </article>
+               </article> */}
 
           </ContentFooter>
      )
