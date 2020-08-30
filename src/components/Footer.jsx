@@ -24,9 +24,7 @@ article{
      }    
 
 }
-.social{
-     justify-content: center;
-}
+
 `
 
 const Footer = () => {
