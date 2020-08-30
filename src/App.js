@@ -9,7 +9,6 @@ import Footer from './components/Footer'
 const GlobalStyle = createGlobalStyle`
 ${Reset};
 a{color: #ffffff; text-decoration: none;}
-
 h1{
   color: white;
   text-transform: uppercase;

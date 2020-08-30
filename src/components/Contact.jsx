@@ -202,7 +202,7 @@ const Contact = () => {
           
      }
      // extraer los valores
-     let { nombres, apellidos, email, telefono, asunto, mensaje } = datos;
+     let { nombres, email, telefono, asunto, mensaje } = datos;
      return (
           <Fragment>
                <SectionForm>
@@ -271,6 +271,7 @@ const Contact = () => {
                                    <textarea
                                         id="mensaje"
                                         name="mensaje"
+                                        value={ mensaje }
                                         onChange={handleChange}
                                    >
 
