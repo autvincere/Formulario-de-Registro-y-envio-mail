@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
+import { media } from '../utils/constants'
 import Photo from '../assets/img/ximena_carlos.jpg';
 import Logo from '../components/Logo'
 import ReCAPTCHA from "react-google-recaptcha";
@@ -12,6 +13,10 @@ display: flex;
 flex-direction: column;
 justify-content:center;
 align-items: center;
+${ media('xs')}{
+  width: 100%;
+  flex-direction: column;
+  }
 
 h1{
      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -55,6 +60,10 @@ p{
   text-align: right;
   padding: 0px 0 0 0;
   font-size: 0.98em;
+
+     ${ media('xs') } {
+               text-align: center;
+     }
   }
 /* > * {
      justify-content:center;   
@@ -66,10 +75,30 @@ height: 100%;
 line-height: 0px;
 overflow: hidden;
 position: relative;
+
+${media('xs')}{
+overflow: inherit;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  }
+
 .social{
      position: absolute;
      bottom: 5px;
-    right: 4px;
+     right: 4px;
+
+    ${media('xs')}{
+          position: inherit;
+          text-align: center;
+          bottom: 0px;
+          right: 0px;
+          margin: 6px 0px;  
+  
+  }
+    
     a{
          margin-right: 6px;
           &:last-child {
@@ -82,6 +111,10 @@ position: relative;
 }
 img{
      width: 100%;
+     ${media('xs')}{
+          width: 260px;
+          margin: 0 auto;
+  }
 }
 `
 const LogoMain = styled(Logo)`
@@ -130,6 +163,7 @@ const ContTextArea = styled.div`
      height: 100px;
      padding-top: 5px;
      position: relative;
+
      label, input {
      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      transition: all 0.2s;
@@ -196,10 +230,10 @@ const Contact = () => {
 
           setDatos({
                ...datos,
-               [e.target.name] : e.target.value
+               [e.target.name]: e.target.value
           })
 
-          
+
      }
      // extraer los valores
      let { nombres, email, telefono, asunto, mensaje } = datos;
@@ -215,11 +249,11 @@ const Contact = () => {
 
                          <ContInput>
                               <div>
-                                   <input 
-                                   type="text" 
-                                   name="nombres" 
-                                   value={ nombres }
-                                   onChange={ handleChange }
+                                   <input
+                                        type="text"
+                                        name="nombres"
+                                        value={nombres}
+                                        onChange={handleChange}
                                    />
                                    <label htmlFor="name" className={label} >Nombres</label>
                               </div>
@@ -228,11 +262,11 @@ const Contact = () => {
 
                          <ContInput>
                               <div>
-                                   <input 
-                                   type="text" 
-                                   name="email" 
-                                   value={ email }
-                                   onChange={ handleChange }
+                                   <input
+                                        type="text"
+                                        name="email"
+                                        value={email}
+                                        onChange={handleChange}
                                    />
                                    <label htmlFor="email" className={label}>Email</label>
                               </div>
@@ -241,11 +275,11 @@ const Contact = () => {
 
                          <ContInput>
                               <div>
-                                   <input 
-                                   type="text" 
-                                   name="email" 
-                                   value={ telefono }
-                                   onChange={ handleChange }
+                                   <input
+                                        type="text"
+                                        name="email"
+                                        value={telefono}
+                                        onChange={handleChange}
                                    />
                                    <label htmlFor="telefono" className={label}>telefono</label>
                               </div>
@@ -254,11 +288,11 @@ const Contact = () => {
 
                          <ContInput>
                               <div>
-                                   <input 
-                                   type="text" 
-                                   name="email" 
-                                   value={ asunto }
-                                   onChange={ handleChange }
+                                   <input
+                                        type="text"
+                                        name="email"
+                                        value={asunto}
+                                        onChange={handleChange}
                                    />
                                    <label htmlFor="asunto" className={label}>Asunto</label>
                               </div>
@@ -271,7 +305,7 @@ const Contact = () => {
                                    <textarea
                                         id="mensaje"
                                         name="mensaje"
-                                        value={ mensaje }
+                                        value={mensaje}
                                         onChange={handleChange}
                                    >
 
@@ -292,11 +326,11 @@ const Contact = () => {
 
                <SectionImg>
                     <article className="social">
-                         <a href="tel:858652585"><Icon icon="facebook" size={29} color="white" style={{verticalAlign: 'middle',}} className="social-icons"/></a>
+                         <a href="tel:858652585"><Icon icon="facebook" size={29} color="white" style={{ verticalAlign: 'middle', }} className="social-icons" /></a>
 
-                         <a href="tel:858652585"><Icon icon="twitter" size={29} color="white" style={{verticalAlign: 'middle'}} className="social-icons"/></a>
+                         <a href="tel:858652585"><Icon icon="twitter" size={29} color="white" style={{ verticalAlign: 'middle' }} className="social-icons" /></a>
 
-                         <a href="tel:858652585"><Icon icon="instagram" size={29} color="white" style={{verticalAlign: 'middle'}} className="social-icons"/></a>
+                         <a href="tel:858652585"><Icon icon="instagram" size={29} color="white" style={{ verticalAlign: 'middle' }} className="social-icons" /></a>
                     </article>
                     <img src={Photo} alt="" />
                </SectionImg>

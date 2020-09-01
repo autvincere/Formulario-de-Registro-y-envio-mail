@@ -17,7 +17,7 @@ h1{
 
 const Bkg = styled.div`
   height: 100vh;
-  width: 100vw;
+  /* width: 100%; */
   background-image: url(${props => props.image});
   background-repeat: no-repeat;
   transition: opacity 0.3s linear;
@@ -26,8 +26,10 @@ const Bkg = styled.div`
   background-position: center center;
   ${totalCenter}
   ${media('xs')}{
-    background-image: none;
-    background-color: blue;
+    /* width: auto; */
+  height: auto;
+  overflow-x: hidden;
+    overflow-y: scroll;
   }
 `;
 const Main = styled.main`
@@ -36,6 +38,13 @@ height: 90vh;
 max-height: 812px;
 display:flex;
 flex-direction: row;
+${media('xs')}{
+  border: 0px solid transparent;
+  flex-direction: column;
+  height: auto;
+  margin: 0 auto;
+  max-height: fit-content;
+  }
 `
 
 const ContFooter = styled(Footer)`

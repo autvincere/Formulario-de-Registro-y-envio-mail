@@ -1,10 +1,14 @@
 import React from 'react'
 import Icon from './Icon'
 import styled from 'styled-components'
+import { media } from '../utils/constants'
 
 const ContentFooter = styled.footer`
 height: 2vh;
 margin: 4px 0px;
+${media('xs')}{
+  height: auto;
+  }
 a{
      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
@@ -12,6 +16,10 @@ article{
      display: flex;
      flex-direction: row;
      justify-content: space-between;
+     ${media('xs')}{
+          flex-direction: column;
+          text-align: center;
+  }
 > * {
      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      margin-right: 3px;
@@ -20,7 +28,10 @@ article{
     font-weight: 600;
           &:last-child{  
           margin-right: 0px;  
-          }    
+          }
+          ${ media('xs') } {
+               margin: 6px 0px;  
+     }    
      }    
 
 }

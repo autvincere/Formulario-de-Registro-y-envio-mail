@@ -71,6 +71,11 @@ export const totalCenter = css`
 export const Grid = styled.div`
     max-width: 1100px;
     width: 100%;
+    ${media('xs')}{
+      width: auto;
+      display: flex;
+    flex-direction: column;
+  }
 `
 // export default {
 //      breakpoints: ['480px', '1024px', '1366px','1680px','1920px'],
