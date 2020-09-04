@@ -30,7 +30,8 @@ article{
           margin-right: 0px;  
           }
           ${ media('xs') } {
-               margin: 6px 0px;  
+               margin: 6px 0px;
+               font-size: 1.1em;  
      }    
      }    
 
@@ -42,12 +43,12 @@ const Footer = () => {
      return (
           <ContentFooter>
                <article>
-                    <a href="tel:858652585"><Icon icon="phone" size={25} color="white" style={{verticalAlign: 'middle'}} />+569 83975723</a>
-                    <a href="tel:858652585"><Icon icon="phone" size={25} color="white" style={{verticalAlign: 'middle'}} />+569 83975723</a>
+                    <a href="tel:+56983975723"><Icon icon="phone" size={25} color="white" style={{verticalAlign: 'middle'}} />+569 83975723</a>
+                    <a href="tel:+56936103113"><Icon icon="phone" size={25} color="white" style={{verticalAlign: 'middle'}} />+569 36103113</a>
                     <a href="mailto:contacto.svabogados@gmail.com"><Icon icon="letter" size={25} color="white" style={{verticalAlign: 'middle'}} /> contacto.svabogados@gmail.com</a>
 
                     <address>
-                         <a href="tel:858652585"><Icon icon="map" size={28} color="white" style={{verticalAlign: 'middle'}} />Av. Providencia N° 1650, oficina 806, Providencia, Santiago de Chile.</a>  
+                         <a href="https://goo.gl/maps/fMmVJ4DquommUzPcA" target="_blank" rel="noopener noreferrer"><Icon icon="map" size={28} color="white" style={{verticalAlign: 'middle'}} />Av. Providencia N° 1650, oficina 806, Providencia, Santiago de Chile.</a>  
                     </address>
                </article>
 

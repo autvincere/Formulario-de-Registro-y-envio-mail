@@ -1,10 +1,13 @@
-import React, {Fragment} from 'react';
+import React, { Fragment, useState} from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
 import { Helmet } from 'react-helmet';
 import Background from '../src/assets/img/bkg.jpg';
 import { Reset, media, Grid, totalCenter} from './utils/constants'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FormSuccess from './components/FormSuccess';
+// import Spinner from './components/Spinner';
+
 
 const GlobalStyle = createGlobalStyle`
 ${Reset};
@@ -24,13 +27,13 @@ const Bkg = styled.div`
   background-color: black;
   background-size: cover;
   background-position: center center;
-  ${totalCenter}
-  ${media('xs')}{
-    /* width: auto; */
-  height: auto;
-  overflow-x: hidden;
-    overflow-y: scroll;
-  }
+    ${totalCenter}
+    ${media('xs')}{
+        background-attachment: fixed;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
 `;
 const Main = styled.main`
 border: 3px solid #e0e0e059;
@@ -49,25 +52,27 @@ ${media('xs')}{
 
 const ContFooter = styled(Footer)`
 height: 10vh;
-background:  black;
-
+background: black;
 `
 
 function App() {
+
+  const [ success, setSuccess ] = useState(false)
+  const [ animation, setAnimation ] = useState(false)
   return (
     <Fragment>
       <Helmet>
         <title>Suárez & Valenzuela || Estudio Jurídico</title>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"></link>
-        <meta name="description" content="Helmet application" />
+        <meta name="description" content="Estudio jurídico conformado por un equipo multidisciplinario de abogados y asesores, cuyo desempeño y asesoría integral está abocada a la representación de nuestros patrocinados en litigios, la prevención y solución alternativa de conflictos" />
       </Helmet>
     <GlobalStyle />
     <Bkg image={Background}>
       <Grid>
       <Main>
- 
-        <Contact />
 
+        { success ? <FormSuccess animation = {animation}/> : <Contact setSuccess={setSuccess} setAnimation={setAnimation}/>}
+        {/* <Spinner /> */}
       </Main>
         <ContFooter>
         </ContFooter>

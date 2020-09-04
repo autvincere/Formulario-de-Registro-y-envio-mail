@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
+import emailjs from 'emailjs-com'
 import { media } from '../utils/constants'
-import Photo from '../assets/img/ximena_carlos.jpg';
 import Logo from '../components/Logo'
 import ReCAPTCHA from "react-google-recaptcha";
 import Icon from './Icon'
+import SectionImg from '../components/SectionImg'
 
 const SectionForm = styled.section`
 width: 50%;
@@ -27,6 +28,9 @@ form{
      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
      width: 90%;
      margin: 2px 0px 17px 0px;
+          ${ media('xs')}{
+          width: 100%;
+          }
 }
 label{
      color: #202020;
@@ -68,54 +72,6 @@ p{
 /* > * {
      justify-content:center;   
 } */
-`
-const SectionImg = styled.section`
-width: 50%;
-height: 100%;
-line-height: 0px;
-overflow: hidden;
-position: relative;
-
-${media('xs')}{
-overflow: inherit;
-  height: auto;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column-reverse;
-  }
-
-.social{
-     position: absolute;
-     bottom: 5px;
-     right: 4px;
-
-    ${media('xs')}{
-          position: inherit;
-          text-align: center;
-          bottom: 0px;
-          right: 0px;
-          margin: 6px 0px;  
-  
-  }
-    
-    a{
-         margin-right: 6px;
-          &:last-child {
-               margin-right: 0px;
-          }
-          .social-icons{
-    filter: drop-shadow(-2px 3px 2px #000000);
-}
-    }
-}
-img{
-     width: 100%;
-     ${media('xs')}{
-          width: 260px;
-          margin: 0 auto;
-  }
-}
 `
 const LogoMain = styled(Logo)`
   width: ${ props => props.width || '238px'};
@@ -169,29 +125,23 @@ const ContTextArea = styled.div`
      transition: all 0.2s;
      touch-action: manipulation;
      }
-      /* label {
-          font-weight: 200;
-          position: absolute;
-          top: 10px;
-          left: 19px;
-     }  */
-textarea{
-          width: 100%;
-          height: 100px;
-	     max-width:100%;
-          resize:none;
-          /* font-size: 1.3em; */
-          border: 0;
-          -webkit-appearance: none;
-          border-radius: 3px;
-          font-size: 1.5em;
-          padding: 12px 0 0 17px;
-          font-weight: 400;
-          cursor: text;
-          &:focus {
-               outline: transparent auto 0px;
+     textarea{
+               width: 100%;
+               height: 100px;
+               max-width:100%;
+               resize:none;
+               /* font-size: 1.3em; */
+               border: 0;
+               -webkit-appearance: none;
+               border-radius: 3px;
+               font-size: 1.5em;
+               padding: 12px 0 0 17px;
+               font-weight: 400;
+               cursor: text;
+               &:focus {
+                    outline: transparent auto 0px;
+               }
           }
-     }
 `
 const Boton = styled.button`
      background-color: #1D6697;
@@ -208,24 +158,54 @@ const Boton = styled.button`
           cursor: pointer;
           background-color: #124465;
      }
+     &:focus{
+          outline: transparent;
+     }
+     &.disabled{
+          background-color: #959595;
+          opacity: 0.9;
+          &:hover{
+          background-color: #959595;
+          cursor: auto;
+     }
+     }
 `
-const Contact = () => {
+const Contact = ({ setSuccess, setAnimation }) => {
 
      const [label, setLabel] = useState('label-primary')
      const [datos, setDatos] = useState({
-          nombres: '',
-          apellidos: '',
+          nombreYapellido: '',
           email: '',
           telefono: '',
           asunto: '',
           mensaje: ''
      })
+     // const [datos, setDatos] = useState({
+     //      nombreYapellido: 'Eduardo',
+     //      email: 'aut.vincere@gmail.com',
+     //      telefono: '56956144519',
+     //      asunto: 'prueba',
+     //      mensaje: 'prueba1'
+     // })
+
+     const [datosNombreYapellido, setDatosNombreYapellido] = useState('')
+     const [ datosEmail, setDatosEmail ] = useState('')
+     const [ datosPhone, setDatosPhone ] = useState('')
+     const [ datosAsunto, setDatosAsunto] = useState('')
+     const [ datosMensaje, setDatosMensaje ] = useState('')
+
+     const [ captcha, setCaptcha] = useState(false)
+
+     const onChange = (value) => {
+          setCaptcha(true)
+          console.log("Captcha value:", value);
+     }
 
      const TEST_SITE_KEY = '6LfbBsQZAAAAAMc3KUafSvoPTHJYexmvyF_LeYnM';
 
      // Leer los datos del formulario y colocarlos en el state
      const handleChange = e => {
-          console.log(e.target.value);
+          // console.log(e.target.value);
           setLabel('label-interaction')
 
           setDatos({
@@ -236,28 +216,92 @@ const Contact = () => {
 
      }
      // extraer los valores
-     let { nombres, email, telefono, asunto, mensaje } = datos;
+     let { nombreYapellido, email, telefono, asunto, mensaje } = datos;
+     
+     const handleSubmit = e => {
+          e.preventDefault();
+
+          if ( !nombreYapellido.trim() ){
+               setDatosNombreYapellido('Ingrese nombre y apellido porfavor')
+               return
+          // }else if ( !/^[A-Z]+$/i.test(nombreYapellido) ){
+          //      setDatosNombreYapellido('Ingrese solo letras porfavor')
+          //      return
+          }else{
+               setDatosNombreYapellido('nombre y apellido correctos')
+          }
+
+          if ( !email.trim() ){
+               setDatosEmail('Ingrese email porfavor')
+               return
+          }else if ( !/\S+@\S+\.\S+/.test(email) ){
+               setDatosEmail('Ingrese caracteres validos porfavor')
+               return
+          }else{
+               setDatosEmail('email correcto')  
+          }
+
+
+          if ( !telefono.trim() ){
+               setDatosPhone('Ingrese un número de telefono porfavor')
+               return
+
+          }else if (!/^\d+$/.test(telefono)) {
+               // console.log('telefono invalido')
+               setDatosPhone('Número de telefono inválido')
+               return
+          } else {
+               // datos.telefono = '+56' + telefono; 
+               setDatosPhone('Número de telefono correcto')
+          }
+
+          if ( !asunto.trim() ){
+               setDatosAsunto('Ingrese un asunto porfavor')
+               return
+          }else{
+               setDatosAsunto('asunto correcto')
+          }
+
+          if ( !mensaje.trim() ){
+               setDatosMensaje('Ingrese mensaje porfavor')
+               return
+          }else{
+               setDatosMensaje('mensaje correcto')
+          }
+
+          console.log('datos correctos!');
+
+          emailjs.sendForm('gmail', 'template_nveymuh', e.target, 'user_QSwylU3q0ZhN4klGcFido')
+          .then((result) => {
+              console.log('exito!',result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+
+          setSuccess(true)
+          setAnimation(true)
+      }
+
+     
+
      return (
           <Fragment>
                <SectionForm>
                     <LogoMain />
-                    <h1>
-                         ¿Necesitas asesoría jurídica?
-                    </h1>
+                    <h1>¿Necesitas asesoría jurídica?</h1>
 
-                    <form>
-
+                    <form onSubmit={ handleSubmit }>
                          <ContInput>
                               <div>
                                    <input
                                         type="text"
-                                        name="nombres"
-                                        value={nombres}
+                                        name="nombreYapellido"
+                                        value={nombreYapellido}
                                         onChange={handleChange}
                                    />
-                                   <label htmlFor="name" className={label} >Nombres</label>
+                                   <label htmlFor="name" className={label}>Nombre y apellido</label>
                               </div>
-                              <p>Porfavor, ingrese un nombre válido </p>
+                              { datosNombreYapellido && <p>{ datosNombreYapellido }</p> }
                          </ContInput>
 
                          <ContInput>
@@ -270,35 +314,36 @@ const Contact = () => {
                                    />
                                    <label htmlFor="email" className={label}>Email</label>
                               </div>
-                              <p>Porfavor, ingrese un nombre válido </p>
+                              { datosEmail && <p>{ datosEmail }</p> }
+                              
                          </ContInput>
 
                          <ContInput>
                               <div>
                                    <input
                                         type="text"
-                                        name="email"
+                                        name="telefono"
                                         value={telefono}
                                         onChange={handleChange}
                                    />
                                    <label htmlFor="telefono" className={label}>telefono</label>
                               </div>
-                              <p>Porfavor, ingrese un nombre válido </p>
+                              { datosPhone && <p>{ datosPhone }</p> }
+                             
                          </ContInput>
 
                          <ContInput>
                               <div>
                                    <input
                                         type="text"
-                                        name="email"
-                                        value={asunto}
+                                        name="asunto"
+                                        value={ asunto }
                                         onChange={handleChange}
                                    />
                                    <label htmlFor="asunto" className={label}>Asunto</label>
                               </div>
-                              <p>Porfavor, ingrese un nombre válido </p>
+                              { datosAsunto && <p>{ datosAsunto }</p> }
                          </ContInput>
-
 
                          <ContTextArea>
                               <div>
@@ -308,32 +353,23 @@ const Contact = () => {
                                         value={mensaje}
                                         onChange={handleChange}
                                    >
-
                                    </textarea>
                                    <label htmlFor="mensaje" className={label} >Mensaje:</label>
                               </div>
-                              <p>Porfavor, ingrese un nombre válido </p>
+                              { datosMensaje && <p>{ datosMensaje }</p> }
                          </ContTextArea>
                          <ReCAPTCHA
                               className="center-recaptcha"
                               sitekey={TEST_SITE_KEY}
-                              onChange={console.log('recaptcha')}
+                              onChange={ onChange }
                          />
-                         <Boton type="submit">enviar <Icon icon="call" size={20} color="white" style={{ verticalAlign: 'middle' }} /></Boton>
+                          {
+                                   captcha ? (<Boton type="submit">enviar <Icon icon="call" size={20} color="white" style={{ verticalAlign: 'middle' }} /></Boton>) : (<Boton className="disabled">enviar <Icon icon="call" size={20} color="white" style={{ verticalAlign: 'middle' }} /></Boton>)
+                              }
                     </form>
-
                </SectionForm>
 
-               <SectionImg>
-                    <article className="social">
-                         <a href="tel:858652585"><Icon icon="facebook" size={29} color="white" style={{ verticalAlign: 'middle', }} className="social-icons" /></a>
-
-                         <a href="tel:858652585"><Icon icon="twitter" size={29} color="white" style={{ verticalAlign: 'middle' }} className="social-icons" /></a>
-
-                         <a href="tel:858652585"><Icon icon="instagram" size={29} color="white" style={{ verticalAlign: 'middle' }} className="social-icons" /></a>
-                    </article>
-                    <img src={Photo} alt="" />
-               </SectionImg>
+               <SectionImg />
 
           </Fragment>
      )
