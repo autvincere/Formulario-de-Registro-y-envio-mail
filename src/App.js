@@ -8,15 +8,13 @@ import Footer from './components/Footer'
 import FormSuccess from './components/FormSuccess';
 // import Spinner from './components/Spinner';
 
-
 const GlobalStyle = createGlobalStyle`
 ${Reset};
 a{color: #ffffff; text-decoration: none;}
 h1{
   color: white;
   text-transform: uppercase;
-}
-`
+}`
 
 const Bkg = styled.div`
   height: 100vh;
@@ -27,8 +25,8 @@ const Bkg = styled.div`
   background-color: black;
   background-size: cover;
   background-position: center center;
-    ${totalCenter}
-    ${media('xs')}{
+  ${totalCenter}
+  ${media('xs')}{
         background-attachment: fixed;
         height: auto;
         overflow-x: hidden;
@@ -73,6 +71,7 @@ function App() {
 
         { success ? <FormSuccess animation = {animation}/> : <Contact setSuccess={setSuccess} setAnimation={setAnimation}/>}
         {/* <Spinner /> */}
+        {/* <FormSuccess/> */}
       </Main>
         <ContFooter>
         </ContFooter>

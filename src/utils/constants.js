@@ -10,7 +10,7 @@ export const Reset = css`
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif; 
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   }
 `
 export const Typography = css`
